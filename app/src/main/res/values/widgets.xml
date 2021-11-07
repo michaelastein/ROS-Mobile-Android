@@ -42,6 +42,10 @@
         Displays data from a nav_msgs::Path message as lines.
     </string>
 
+    <!-- SMartphonegps -->
+    <string name="Smartphonegps_description">
+    This widgets send the GPS coordinates of the smartphone to the robot regularly.
+</string>
 
     <!-- Pose -->
     <string name="Pose_description">
