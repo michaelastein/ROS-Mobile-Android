@@ -7,12 +7,14 @@ import sensor_msgs.NavSatFix;
 
 
 public class SmartphonegpsEntity extends PublisherWidgetEntity {
+    public String text;
 
     public SmartphonegpsEntity() {
         this.width = 4;
         this.height = 2;
         this.text = "Send GPS";
-        this.immediatePublish = true;
+       // this.publishRate = 20f;
+
 
         this.topic = new Topic("smartphone_gps", NavSatFix._TYPE);
     }

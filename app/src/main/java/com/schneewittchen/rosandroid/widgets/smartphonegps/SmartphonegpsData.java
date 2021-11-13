@@ -1,5 +1,7 @@
 package com.schneewittchen.rosandroid.widgets.smartphonegps;
 
+import android.location.LocationProvider;
+
 import com.schneewittchen.rosandroid.model.entities.widgets.BaseEntity;
 import com.schneewittchen.rosandroid.model.repositories.rosRepo.node.BaseData;
 
@@ -16,19 +18,25 @@ import sensor_msgs.NavSatFix;
 
 public class SmartphonegpsData extends BaseData {
 
-float longitude;
-float latitude;
-float altitude;
+    private double longitude;
+    private double latitude;
+    private double altitude;
+    private gpsTracker gps;
 
     public  SmartphonegpsData() {
-
+        gps = new gpsTracker();
+        longitude = gps.getLongitude();
+        latitude = gps.getLatitude();
+        altitude = gps.getALtitude();
     }
 
 
     @Override
     public Message toRosMessage(Publisher<Message> publisher, BaseEntity widget) {
         sensor_msgs.NavSatFix message = (NavSatFix) publisher.newMessage();
-        // TODO gps daten bekommen vom Handy
+        longitude = gps.getLongitude();
+        latitude = gps.getLatitude();
+        altitude = gps.getALtitude();
         message.setLongitude(longitude);
         message.setLatitude(latitude);
         message.setAltitude(altitude);

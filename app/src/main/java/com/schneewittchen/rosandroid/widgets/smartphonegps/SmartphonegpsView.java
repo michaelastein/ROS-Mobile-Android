@@ -1,5 +1,7 @@
 package com.schneewittchen.rosandroid.widgets.smartphonegps;
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,12 +16,17 @@ import com.schneewittchen.rosandroid.R;
 import com.schneewittchen.rosandroid.ui.views.widgets.PublisherWidgetView;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
+import java.util.ArrayList;
 
 public class SmartphonegpsView extends PublisherWidgetView {
     Paint buttonPaint;
     TextPaint textPaint;
     StaticLayout staticLayout;
     boolean sendingGPS;
+    private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
+
 
 
     public SmartphonegpsView(Context context) {
@@ -33,16 +40,29 @@ public class SmartphonegpsView extends PublisherWidgetView {
         init();
     }
     private void init() {
-         = new Paint();
-        .setColor(getResources().getColor(R.color.colorPrimary));
-        .setStyle(Paint.Style.FILL_AND_STROKE);
+        buttonPaint = new Paint();
+        buttonPaint.setColor(getResources().getColor(R.color.colorPrimary));
+        buttonPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 
         textPaint = new TextPaint();
         textPaint.setColor(Color.BLACK);
         textPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         textPaint.setTextSize(26 * getResources().getDisplayMetrics().density);
+        requestPermissionsIfNecessary(new String[]{
+                // ACCESS_FINE_LOCATION is required in order to send GPS position
+                Manifest.permission.ACCESS_FINE_LOCATION
+        });
     }
-
+    private void requestPermissionsIfNecessary(String[] permissions) {
+        ArrayList<String> permissionsToRequest = new ArrayList<>();
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(this.getContext(), permission)
+                    != PackageManager.PERMISSION_GRANTED) {
+                // Permission is not granted
+                permissionsToRequest.add(permission);
+            }
+        }
+    }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (this.editMode) {
@@ -55,8 +75,6 @@ public class SmartphonegpsView extends PublisherWidgetView {
             case MotionEvent.ACTION_DOWN:
                 buttonPaint.setColor(getResources().getColor(R.color.color_attention));
                 this.publishViewData(new SmartphonegpsData());
-                // TODO Daten
-                //TODO regelmäßig senden implementieren später
                 break;
             default:
                 return false;
@@ -79,11 +97,9 @@ public class SmartphonegpsView extends PublisherWidgetView {
 
         SmartphonegpsEntity entity = (SmartphonegpsEntity) widgetEntity;
 
-        if (entity.rotation == 90 || entity.rotation == 270) {
-            textLayoutWidth = height;
-        }
 
-        canvas.drawRect(new Rect(0, 0, (int) width, (int) height), );
+
+        canvas.drawRect(new Rect(0, 0, (int) width, (int) height),buttonPaint );
 
         staticLayout = new StaticLayout(entity.text,
                 textPaint,
@@ -93,7 +109,7 @@ public class SmartphonegpsView extends PublisherWidgetView {
                 0,
                 false);
         canvas.save();
-        canvas.rotate(entity.rotation, width / 2, height / 2);
+        //canvas.rotate(entity.rotation, width / 2, height / 2);
         canvas.translate(((width / 2) - staticLayout.getWidth() / 2), height / 2 - staticLayout.getHeight() / 2);
         staticLayout.draw(canvas);
         canvas.restore();
