@@ -1,15 +1,11 @@
 package com.schneewittchen.rosandroid.widgets.smartphonegps;
 
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
 
-import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.schneewittchen.rosandroid.R;
 import com.schneewittchen.rosandroid.model.entities.widgets.BaseEntity;
 import com.schneewittchen.rosandroid.ui.views.details.PublisherWidgetViewHolder;
-import com.schneewittchen.rosandroid.utility.Utils;
 import com.schneewittchen.rosandroid.widgets.button.ButtonEntity;
 
 import java.util.Collections;

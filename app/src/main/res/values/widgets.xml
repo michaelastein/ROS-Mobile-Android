@@ -11,6 +11,7 @@
         <item>Label</item>
         <item>Logger</item>
         <item>RqtPlot</item>
+        <item>Smartphonegps</item>
         <item>Viz2D</item>
     </string-array>
 

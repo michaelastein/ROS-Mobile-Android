@@ -1,7 +1,5 @@
 package com.schneewittchen.rosandroid.widgets.smartphonegps;
 
-import android.location.LocationProvider;
-
 import com.schneewittchen.rosandroid.model.entities.widgets.BaseEntity;
 import com.schneewittchen.rosandroid.model.repositories.rosRepo.node.BaseData;
 
@@ -21,13 +19,13 @@ public class SmartphonegpsData extends BaseData {
     private double longitude;
     private double latitude;
     private double altitude;
-    private gpsTracker gps;
+    private GpsTracker gps;
 
     public  SmartphonegpsData() {
-        gps = new gpsTracker();
+        gps = new GpsTracker();
         longitude = gps.getLongitude();
         latitude = gps.getLatitude();
-        altitude = gps.getALtitude();
+        altitude = gps.getAltitude();
     }
 
 
@@ -36,7 +34,7 @@ public class SmartphonegpsData extends BaseData {
         sensor_msgs.NavSatFix message = (NavSatFix) publisher.newMessage();
         longitude = gps.getLongitude();
         latitude = gps.getLatitude();
-        altitude = gps.getALtitude();
+        altitude = gps.getAltitude();
         message.setLongitude(longitude);
         message.setLatitude(latitude);
         message.setAltitude(altitude);
