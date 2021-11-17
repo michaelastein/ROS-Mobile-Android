@@ -26,11 +26,13 @@ public class SmartphonegpsView extends PublisherWidgetView {
     StaticLayout staticLayout;
     boolean sendingGPS;
     private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
+    Context context;
 
 
 
     public SmartphonegpsView(Context context) {
         super(context);
+        this.context = context;
         init();
         sendingGPS = false;
     }
@@ -74,7 +76,8 @@ public class SmartphonegpsView extends PublisherWidgetView {
                 break;
             case MotionEvent.ACTION_DOWN:
                 buttonPaint.setColor(getResources().getColor(R.color.color_attention));
-                this.publishViewData(new SmartphonegpsData());
+                this.publishViewData(new SmartphonegpsData(context));
+
                 break;
             default:
                 return false;
@@ -85,10 +88,17 @@ public class SmartphonegpsView extends PublisherWidgetView {
         return true;
     }
 
+   /** public void sendGps(){
+
+    this.publishViewData(new SmartphonegpsData());
+
+    }
+    **/
+
 
     @Override
     public void onDraw(Canvas canvas) {
-
+// TODO hier regelmäßig daten senden?
         super.onDraw(canvas);
 
         float width = getWidth();

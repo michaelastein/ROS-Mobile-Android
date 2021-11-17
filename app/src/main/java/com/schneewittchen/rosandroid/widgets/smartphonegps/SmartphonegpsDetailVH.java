@@ -1,5 +1,6 @@
 package com.schneewittchen.rosandroid.widgets.smartphonegps;
 
+import android.telephony.CarrierConfigManager;
 import android.view.View;
 import android.widget.EditText;
 
@@ -39,6 +40,7 @@ public class SmartphonegpsDetailVH extends PublisherWidgetViewHolder {
         ButtonEntity buttonEntity = (ButtonEntity)entity;
 
         buttonEntity.text = textText.getText().toString();
+
 
     }
 
