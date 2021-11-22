@@ -1,6 +1,11 @@
 package com.schneewittchen.rosandroid.ui.fragments.viz;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +26,7 @@ import com.schneewittchen.rosandroid.ui.general.DataListener;
 import com.schneewittchen.rosandroid.ui.general.WidgetChangeListener;
 import com.schneewittchen.rosandroid.model.entities.widgets.BaseEntity;
 import com.schneewittchen.rosandroid.model.repositories.rosRepo.node.BaseData;
+import com.schneewittchen.rosandroid.widgets.smartphonegps.SmartphonegpsData;
 
 
 /**
@@ -41,6 +47,12 @@ public class VizFragment extends Fragment implements DataListener, WidgetChangeL
     private DrawerLayout drawerLayout;
     private ImageButton optionsOpenButton;
     private SwitchMaterial vizEditModeSwitch;
+    private ServiceConnection serviceConnection;
+    private  boolean isServiceBound;
+    private BackgroundLocationUpdateService locationService;
+    private Intent intent;
+    private double longitude = 0, latitude = 0, altitude = 0;
+
 
 
     public static VizFragment newInstance() {
@@ -69,6 +81,30 @@ public class VizFragment extends Fragment implements DataListener, WidgetChangeL
         drawerLayout.setScrimColor(getResources().getColor(R.color.drawerFadeColor));
 
         vizEditModeSwitch = view.findViewById(R.id.edit_viz_switch);
+        intent = new Intent(getActivity().getBaseContext(), BackgroundLocationUpdateService.class);
+        getActivity().startService(intent);
+      bindService();
+
+    }
+
+    private void bindService(){
+        if (serviceConnection == null){
+            serviceConnection = new ServiceConnection() {
+                @Override
+                public void onServiceConnected(ComponentName name, IBinder service) {
+                    BackgroundLocationUpdateService.LocalBinder localBinder = (BackgroundLocationUpdateService.LocalBinder) service;
+                    locationService = localBinder.getService();
+                    isServiceBound = true;
+                }
+
+                @Override
+                public void onServiceDisconnected(ComponentName name) {
+                    isServiceBound = false;
+                }
+            };
+        }
+        getActivity().bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
+
     }
 
     @Override
@@ -100,6 +136,13 @@ public class VizFragment extends Fragment implements DataListener, WidgetChangeL
 
     @Override
     public void onNewWidgetData(BaseData data) {
+
+        //TODO wird vorher schon toROSMessage aufgerufen?
+        if (data instanceof SmartphonegpsData){
+            receiveLocation();
+            ((SmartphonegpsData) data).setGPS(longitude,latitude, altitude);
+        }
+
         mViewModel.publishData(data);
     }
 
@@ -107,4 +150,18 @@ public class VizFragment extends Fragment implements DataListener, WidgetChangeL
     public void onWidgetDetailsChanged(BaseEntity widgetEntity) {
         mViewModel.updateWidget(widgetEntity);
     }
+
+    private void receiveLocation(){
+        if(isServiceBound){
+           double[] gps = locationService.getLocation();
+           longitude = gps[0];
+           latitude = gps[1];
+           altitude = gps[2];
+        }else{
+            longitude = 0;
+            latitude = 0;
+            altitude = 0;
+        }
+    }
+
 }

@@ -41,6 +41,8 @@
                 <action android:name="org.ros.android.NodeMainExecutorService" />
             </intent-filter>
         </service>
+        <service android:name=".ui.fragments.viz.BackgroundLocationUpdateService"/>
+
     </application>
 
 </manifest>
