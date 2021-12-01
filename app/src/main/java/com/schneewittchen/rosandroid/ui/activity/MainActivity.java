@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         this.requestPermissions();
+        startService(new Intent(getBaseContext(), LocationUpdateService.class));
     }
 
     @Override
@@ -83,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
         String[] permissions = new String[] {
                 Manifest.permission.ACCESS_NETWORK_STATE,
                 Manifest.permission.ACCESS_FINE_LOCATION,
-              //  Manifest.permission.ACCESS_COARSE_LOCATION,
-             //   Manifest.permission.ACCESS_BACKGROUND_LOCATION
+               Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION
         };
         ActivityCompat.requestPermissions(this, permissions, LOCATION_PERM);
     }

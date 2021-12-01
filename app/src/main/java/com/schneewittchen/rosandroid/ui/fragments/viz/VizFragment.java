@@ -87,7 +87,7 @@ public class VizFragment extends Fragment implements DataListener, WidgetChangeL
 
         vizEditModeSwitch = view.findViewById(R.id.edit_viz_switch);
 
-    //    EventBus.getDefault().register(this);
+     //  EventBus.getDefault().register(this);
 
 
     }
@@ -119,8 +119,9 @@ public class VizFragment extends Fragment implements DataListener, WidgetChangeL
             }
         });
 
-        getActivity().startService(new Intent(getActivity().getBaseContext(), LocationUpdateService.class));
+        //getActivity().startService(new Intent(getActivity().getBaseContext(), LocationUpdateService.class));
         EventBus.getDefault().register(this);
+
     }
 
     @Override
@@ -149,7 +150,17 @@ public class VizFragment extends Fragment implements DataListener, WidgetChangeL
         latitude = event.getLocation().latitude;
         longitude = event.getLocation().latitude;
         altitude = event.getLocation().altitude;
-        longitude  =  longitude + 1;
+
+        //todo
+
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(LocationUpdateEvent event) {
+
+        latitude = event.getLocation().latitude;
+        longitude = event.getLocation().latitude;
+        altitude = event.getLocation().altitude;
+
         //todo
 
     }
