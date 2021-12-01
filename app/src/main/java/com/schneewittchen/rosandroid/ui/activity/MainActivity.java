@@ -1,6 +1,7 @@
 package com.schneewittchen.rosandroid.ui.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import com.schneewittchen.rosandroid.R;
 import com.schneewittchen.rosandroid.ui.fragments.intro.IntroFragment;
 import com.schneewittchen.rosandroid.ui.fragments.main.MainFragment;
 import com.schneewittchen.rosandroid.ui.fragments.main.OnBackPressedListener;
+import com.schneewittchen.rosandroid.ui.fragments.viz.LocationUpdateService;
 
 
 /**
@@ -80,7 +82,10 @@ public class MainActivity extends AppCompatActivity {
     private void requestPermissions() {
         String[] permissions = new String[] {
                 Manifest.permission.ACCESS_NETWORK_STATE,
-                Manifest.permission.ACCESS_FINE_LOCATION};
+                Manifest.permission.ACCESS_FINE_LOCATION,
+              //  Manifest.permission.ACCESS_COARSE_LOCATION,
+             //   Manifest.permission.ACCESS_BACKGROUND_LOCATION
+        };
         ActivityCompat.requestPermissions(this, permissions, LOCATION_PERM);
     }
 

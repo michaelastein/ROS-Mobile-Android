@@ -88,11 +88,11 @@ public class BackgroundLocationUpdateService extends Service implements GoogleAp
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        StartForeground();
-        final Handler handler = new Handler();
-        final Runnable runnable = new Runnable() {
+        //StartForeground();
+       // final Handler handler = new Handler();
+        //final Runnable runnable = new Runnable() {
 
-            @Override
+         /**   @Override
             public void run() {
                 try {
                     if (!stopService) {
@@ -108,7 +108,9 @@ public class BackgroundLocationUpdateService extends Service implements GoogleAp
                 }
             }
         };
+
         handler.postDelayed(runnable, 2000);
+         **/
 
         buildGoogleApiClient();
 
@@ -130,29 +132,6 @@ public class BackgroundLocationUpdateService extends Service implements GoogleAp
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        StartForeground();
-        final Handler handler = new Handler();
-        final Runnable runnable = new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    if (!stopService) {
-                        //Perform your task here
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    if (!stopService) {
-                        handler.postDelayed(this, TimeUnit.SECONDS.toMillis(10));
-                    }
-                }
-            }
-        };
-        handler.postDelayed(runnable, 2000);
-
-        buildGoogleApiClient();
 
 
         return binder;
@@ -193,9 +172,7 @@ public class BackgroundLocationUpdateService extends Service implements GoogleAp
     public void onLocationChanged(Location location) {
         Log.e(TAG_LOCATION, "Location Changed Latitude : " + location.getLatitude() + "\tLongitude : " + location.getLongitude());
 
-       // intent.putExtra("Longitude", location.getLongitude());
-      //  intent.putExtra("Latitude", location.getLatitude());
-      //  intent.putExtra("Altitude", location.getAltitude());
+
 
 
 
@@ -207,9 +184,7 @@ public class BackgroundLocationUpdateService extends Service implements GoogleAp
             requestLocationUpdate();
         } else {
             Log.e(TAG_LOCATION, "Latitude : " + location.getLatitude() + "\tLongitude : " + location.getLongitude());
-            //intent.putExtra("Longitude", location.getLongitude());
-            //intent.putExtra("Latitude", location.getLatitude());
-           // intent.putExtra("Altitude", location.getAltitude());
+
         }
     }
 

@@ -20,12 +20,12 @@ import sensor_msgs.NavSatFix;
 
 public class SmartphonegpsData extends BaseData {
 
-    private double longitude;
-    private double latitude;
-    private double altitude;
+    private double longitude = 0.0;
+    private double latitude = 0.0;
+    private double altitude = 0.0;
 
 
-    public  SmartphonegpsData(Context context) {
+    public  SmartphonegpsData() {
 
     }
 
