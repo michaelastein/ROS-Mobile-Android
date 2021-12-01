@@ -148,20 +148,23 @@ public class VizFragment extends Fragment implements DataListener, WidgetChangeL
     public void onMessageEvent(LocationUpdateEvent event) {
 
         latitude = event.getLocation().latitude;
-        longitude = event.getLocation().latitude;
+        longitude = event.getLocation().longitude;
         altitude = event.getLocation().altitude;
 
-        //todo
+        // für ständige GPS Übertragung:
+
+        SmartphonegpsData data = new SmartphonegpsData();
+        data.setGPS(longitude, latitude, altitude);
+        mViewModel.publishData(data);
+
 
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(LocationUpdateEvent event) {
 
-        latitude = event.getLocation().latitude;
-        longitude = event.getLocation().latitude;
-        altitude = event.getLocation().altitude;
+        onMessageEvent(event);
 
-        //todo
+
 
     }
 }
