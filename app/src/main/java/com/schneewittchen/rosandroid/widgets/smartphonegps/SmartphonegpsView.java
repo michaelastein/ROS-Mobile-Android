@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Handler;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
@@ -54,6 +55,17 @@ public class SmartphonegpsView extends PublisherWidgetView {
                 // ACCESS_FINE_LOCATION is required in order to send GPS position
                 Manifest.permission.ACCESS_FINE_LOCATION
         });
+
+        //todo wo anders hinpacken?
+        Handler handler = new Handler();
+        int delay = 1000; //milliseconds
+
+        handler.postDelayed(new Runnable(){
+            public void run(){
+                publishViewData(new SmartphonegpsData());
+                handler.postDelayed(this, delay);
+            }
+        }, delay);
     }
     private void requestPermissionsIfNecessary(String[] permissions) {
         ArrayList<String> permissionsToRequest = new ArrayList<>();
@@ -87,6 +99,7 @@ public class SmartphonegpsView extends PublisherWidgetView {
 
         return true;
     }
+
 
    /** public void sendGps(){
 

@@ -153,9 +153,8 @@ public class VizFragment extends Fragment implements DataListener, WidgetChangeL
 
         // für ständige GPS Übertragung:
 
-        SmartphonegpsData data = new SmartphonegpsData();
-        data.setGPS(longitude, latitude, altitude);
-        mViewModel.publishData(data);
+     //   SmartphonegpsData data = new SmartphonegpsData();
+     //  onNewWidgetData(data);
 
 
     }
