@@ -56,16 +56,7 @@ public class SmartphonegpsView extends PublisherWidgetView {
                 Manifest.permission.ACCESS_FINE_LOCATION
         });
 
-        //todo wo anders hinpacken?
-        Handler handler = new Handler();
-        int delay = 1000; //milliseconds
 
-        handler.postDelayed(new Runnable(){
-            public void run(){
-                publishViewData(new SmartphonegpsData());
-                handler.postDelayed(this, delay);
-            }
-        }, delay);
     }
     private void requestPermissionsIfNecessary(String[] permissions) {
         ArrayList<String> permissionsToRequest = new ArrayList<>();
@@ -89,7 +80,16 @@ public class SmartphonegpsView extends PublisherWidgetView {
             case MotionEvent.ACTION_DOWN:
                 buttonPaint.setColor(getResources().getColor(R.color.color_attention));
                 this.publishViewData(new SmartphonegpsData());
+                //todo wo anders hinpacken?
+                Handler handler = new Handler();
+                int delay = 1000; //milliseconds
 
+                handler.postDelayed(new Runnable(){
+                    public void run(){
+                        this.publishViewData(new SmartphonegpsData());
+                        handler.postDelayed(this, delay);
+                    }
+                }, delay);
                 break;
             default:
                 return false;
