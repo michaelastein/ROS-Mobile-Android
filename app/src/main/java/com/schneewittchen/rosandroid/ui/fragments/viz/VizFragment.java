@@ -51,10 +51,6 @@ public class VizFragment extends Fragment implements DataListener, WidgetChangeL
     private DrawerLayout drawerLayout;
     private ImageButton optionsOpenButton;
     private SwitchMaterial vizEditModeSwitch;
-    private ServiceConnection serviceConnection;
-    private boolean isServiceBound;
-    private BackgroundLocationUpdateService locationService;
-    private Intent intent;
     private double longitude = 0, latitude = 0, altitude = 0;
 
 
@@ -87,7 +83,7 @@ public class VizFragment extends Fragment implements DataListener, WidgetChangeL
 
         vizEditModeSwitch = view.findViewById(R.id.edit_viz_switch);
 
-     //  EventBus.getDefault().register(this);
+        //  EventBus.getDefault().register(this);
 
 
     }
@@ -151,18 +147,19 @@ public class VizFragment extends Fragment implements DataListener, WidgetChangeL
         longitude = event.getLocation().longitude;
         altitude = event.getLocation().altitude;
 
+        //TODO
         // für ständige GPS Übertragung:
 
-     //   SmartphonegpsData data = new SmartphonegpsData();
-     //  onNewWidgetData(data);
+        SmartphonegpsData data = new SmartphonegpsData();
+        onNewWidgetData(data);
 
 
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(LocationUpdateEvent event) {
 
         onMessageEvent(event);
-
 
 
     }

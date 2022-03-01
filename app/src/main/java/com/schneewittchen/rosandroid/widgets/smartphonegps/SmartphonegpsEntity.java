@@ -16,6 +16,6 @@ public class SmartphonegpsEntity extends PublisherWidgetEntity {
        // this.publishRate = 20f;
 
 
-        this.topic = new Topic("smartphone_gps", NavSatFix._TYPE);
+        this.topic = new Topic("jackal_gps", NavSatFix._TYPE);
     }
 }

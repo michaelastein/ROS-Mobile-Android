@@ -56,7 +56,7 @@ public class SmartphonegpsView extends PublisherWidgetView {
                 Manifest.permission.ACCESS_FINE_LOCATION
         });
 
-        //todo wo anders hinpacken?
+        /**todo wo anders hinpacken?
         Handler handler = new Handler();
         int delay = 1000; //milliseconds
 
@@ -66,6 +66,7 @@ public class SmartphonegpsView extends PublisherWidgetView {
                 handler.postDelayed(this, delay);
             }
         }, delay);
+         **/
     }
     private void requestPermissionsIfNecessary(String[] permissions) {
         ArrayList<String> permissionsToRequest = new ArrayList<>();
