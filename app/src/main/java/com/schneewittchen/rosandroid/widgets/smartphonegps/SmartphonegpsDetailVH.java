@@ -42,6 +42,7 @@ public class SmartphonegpsDetailVH extends PublisherWidgetViewHolder {
         buttonEntity.text = textText.getText().toString();
 
 
+
     }
 
     @Override

@@ -31,6 +31,7 @@ public class SmartphonegpsView extends PublisherWidgetView {
 
 
 
+
     public SmartphonegpsView(Context context) {
         super(context);
         this.context = context;
@@ -40,11 +41,12 @@ public class SmartphonegpsView extends PublisherWidgetView {
 
     public SmartphonegpsView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+
         init();
     }
     private void init() {
         buttonPaint = new Paint();
-        buttonPaint.setColor(getResources().getColor(R.color.colorPrimary));
+        buttonPaint.setColor(getResources().getColor(R.color.colorAccent));
         buttonPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 
         textPaint = new TextPaint();
@@ -55,18 +57,19 @@ public class SmartphonegpsView extends PublisherWidgetView {
                 // ACCESS_FINE_LOCATION is required in order to send GPS position
                 Manifest.permission.ACCESS_FINE_LOCATION
         });
-
-        /**todo wo anders hinpacken?
+        //todo wo anders hinpacken?
         Handler handler = new Handler();
         int delay = 1000; //milliseconds
 
         handler.postDelayed(new Runnable(){
             public void run(){
-                publishViewData(new SmartphonegpsData());
+                if(sendingGPS){
+                    sendGps();}
                 handler.postDelayed(this, delay);
             }
         }, delay);
-         **/
+
+
     }
     private void requestPermissionsIfNecessary(String[] permissions) {
         ArrayList<String> permissionsToRequest = new ArrayList<>();
@@ -85,13 +88,17 @@ public class SmartphonegpsView extends PublisherWidgetView {
         }
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_UP:
-                buttonPaint.setColor(getResources().getColor(R.color.colorPrimary));
                 break;
             case MotionEvent.ACTION_DOWN:
-                buttonPaint.setColor(getResources().getColor(R.color.color_attention));
-                this.publishViewData(new SmartphonegpsData());
-
-                break;
+               // this.publishViewData(new SmartphonegpsData());
+                sendingGPS = !sendingGPS;
+                if(sendingGPS) {
+                    buttonPaint.setColor(getResources().getColor(R.color.color_attention));
+                }
+                else {
+                    buttonPaint.setColor(getResources().getColor(R.color.ok_green));
+                }
+                    break;
             default:
                 return false;
         }
@@ -102,17 +109,16 @@ public class SmartphonegpsView extends PublisherWidgetView {
     }
 
 
-   /** public void sendGps(){
+    public void sendGps(){
 
     this.publishViewData(new SmartphonegpsData());
 
     }
-    **/
+
 
 
     @Override
     public void onDraw(Canvas canvas) {
-// TODO hier regelmäßig daten senden?
         super.onDraw(canvas);
 
         float width = getWidth();
@@ -120,7 +126,6 @@ public class SmartphonegpsView extends PublisherWidgetView {
         float textLayoutWidth = width;
 
         SmartphonegpsEntity entity = (SmartphonegpsEntity) widgetEntity;
-
 
 
         canvas.drawRect(new Rect(0, 0, (int) width, (int) height),buttonPaint );
@@ -136,6 +141,21 @@ public class SmartphonegpsView extends PublisherWidgetView {
         //canvas.rotate(entity.rotation, width / 2, height / 2);
         canvas.translate(((width / 2) - staticLayout.getWidth() / 2), height / 2 - staticLayout.getHeight() / 2);
         staticLayout.draw(canvas);
+        /**todo wo anders hinpacken?
+        Handler handler = new Handler();
+        int delay = 1000; //milliseconds
+
+        handler.postDelayed(new Runnable(){
+            public void run(){
+                if(sendingGPS){
+               sendGps();}
+                handler.postDelayed(this, delay);
+            }
+        }, delay);
+         **/
+
         canvas.restore();
     }
+
+
 }

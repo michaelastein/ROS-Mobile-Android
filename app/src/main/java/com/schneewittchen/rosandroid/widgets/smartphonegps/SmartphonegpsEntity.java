@@ -13,7 +13,6 @@ public class SmartphonegpsEntity extends PublisherWidgetEntity {
         this.width = 4;
         this.height = 2;
         this.text = "Send GPS";
-       // this.publishRate = 20f;
 
 
         this.topic = new Topic("jackal_gps", NavSatFix._TYPE);
