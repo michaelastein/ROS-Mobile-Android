@@ -148,10 +148,10 @@ public class VizFragment extends Fragment implements DataListener, WidgetChangeL
         altitude = event.getLocation().altitude;
 
         //TODO
-        // für ständige GPS Übertragung:
+        // für ständige GPS Übertragung?
 
-        SmartphonegpsData data = new SmartphonegpsData();
-        onNewWidgetData(data);
+        //SmartphonegpsData data = new SmartphonegpsData();
+      //  onNewWidgetData(data);
 
 
     }

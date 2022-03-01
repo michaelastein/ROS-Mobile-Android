@@ -90,7 +90,6 @@ public class SmartphonegpsView extends PublisherWidgetView {
             case MotionEvent.ACTION_UP:
                 break;
             case MotionEvent.ACTION_DOWN:
-               // this.publishViewData(new SmartphonegpsData());
                 sendingGPS = !sendingGPS;
                 if(sendingGPS) {
                     buttonPaint.setColor(getResources().getColor(R.color.color_attention));

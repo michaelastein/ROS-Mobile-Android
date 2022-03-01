@@ -34,9 +34,6 @@ public class SmartphonegpsData extends BaseData {
     public Message toRosMessage(Publisher<Message> publisher, BaseEntity widget) {
         sensor_msgs.NavSatFix message = (NavSatFix) publisher.newMessage();
 
-        //longitude = gps.getLongitude();
-       // latitude = gps.getLatitude();
-        //altitude = gps.getAltitude();
         message.setLongitude(longitude);
         message.setLatitude(latitude);
         message.setAltitude(altitude);
