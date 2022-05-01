@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 
+// In der View-Klasse werden die Darstellung und Interaktion des Widgets beschrieben
 public class SmartphonegpsView extends PublisherWidgetView {
     Paint buttonPaint;
     TextPaint textPaint;
@@ -53,11 +54,14 @@ public class SmartphonegpsView extends PublisherWidgetView {
         textPaint.setColor(Color.BLACK);
         textPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         textPaint.setTextSize(26 * getResources().getDisplayMetrics().density);
+
+        // überprüft, ob Berechtigung für Zugriff auf GPS-Daten des Smartphones gegeben sind
         requestPermissionsIfNecessary(new String[]{
                 // ACCESS_FINE_LOCATION is required in order to send GPS position
                 Manifest.permission.ACCESS_FINE_LOCATION
         });
-        //todo wo anders hinpacken?
+
+        // Handler schickt jede Sekunde eine neue GPS-Nachricht los an den Roboter
         Handler handler = new Handler();
         int delay = 1000; //milliseconds
 
@@ -71,6 +75,9 @@ public class SmartphonegpsView extends PublisherWidgetView {
 
 
     }
+
+    // überprüft, ob Berechtigung für Zugriff auf GPS-Daten des Smartphones gegeben sind
+
     private void requestPermissionsIfNecessary(String[] permissions) {
         ArrayList<String> permissionsToRequest = new ArrayList<>();
         for (String permission : permissions) {
@@ -81,6 +88,9 @@ public class SmartphonegpsView extends PublisherWidgetView {
             }
         }
     }
+
+    // regelt, was passiert, wenn der Button gedrückt wird
+    // schaltet ein/aus, ob GPS Daten automatisch gesendet werden
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (this.editMode) {
@@ -115,7 +125,7 @@ public class SmartphonegpsView extends PublisherWidgetView {
     }
 
 
-
+// zeichnet den Canvas neu
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -140,7 +150,7 @@ public class SmartphonegpsView extends PublisherWidgetView {
         //canvas.rotate(entity.rotation, width / 2, height / 2);
         canvas.translate(((width / 2) - staticLayout.getWidth() / 2), height / 2 - staticLayout.getHeight() / 2);
         staticLayout.draw(canvas);
-        /**todo wo anders hinpacken?
+        /**
         Handler handler = new Handler();
         int delay = 1000; //milliseconds
 

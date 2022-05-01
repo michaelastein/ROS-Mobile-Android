@@ -4,6 +4,7 @@ import android.location.Location;
 
 import com.schneewittchen.rosandroid.ui.fragments.viz.LocationDTO;
 
+// Verpackt LocationDTO Objekte, damit sie über den Eventbus vershcickt werden können
 public class LocationUpdateEvent {
     private LocationDTO location;
 

@@ -27,6 +27,9 @@ import org.greenrobot.eventbus.EventBus;
 /**
  * Starts location updates on background and publish LocationUpdateEvent upon
  * each new location result.
+ *
+ * Code von https://medium.com/@msaudi/android-getting-user-location-updates-in-a-background-service-and-draw-location-updates-on-a-map-225589d28cf6
+ * angepasst an unser Projekt
  */
 public class LocationUpdateService extends Service {
 
@@ -36,7 +39,7 @@ public class LocationUpdateService extends Service {
     private LocationRequest locationRequest;
     private LocationSettingsRequest locationSettingsRequest;
     private Context context;
-    // Problem mit context? todo
+
 
     //endregion
 
@@ -73,6 +76,7 @@ public class LocationUpdateService extends Service {
         return START_STICKY;
     }
 
+    //startet die Location Updates
     @SuppressLint("MissingPermission")
     private void startLocationUpdates() {
 

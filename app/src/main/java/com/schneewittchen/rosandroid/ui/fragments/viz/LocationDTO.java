@@ -1,5 +1,6 @@
 package com.schneewittchen.rosandroid.ui.fragments.viz;
 
+// Datentransferobjekt für die GPS-Daten
 public class LocationDTO {
     public double latitude;
     public double longitude;

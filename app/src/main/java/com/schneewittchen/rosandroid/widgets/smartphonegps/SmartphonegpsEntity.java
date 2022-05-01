@@ -5,9 +5,13 @@ import com.schneewittchen.rosandroid.model.repositories.rosRepo.message.Topic;
 
 import sensor_msgs.NavSatFix;
 
+// In der Entitätsklasse werden die Objekteigenschaften und Standardwerte definiert
 
 public class SmartphonegpsEntity extends PublisherWidgetEntity {
     public String text;
+
+    // Im Konstrukter werden Größe und der Text für den Button
+    // sowie den Topic-Namen und die ROS-Nachrichtenart festgelegt
 
     public SmartphonegpsEntity() {
         this.width = 4;

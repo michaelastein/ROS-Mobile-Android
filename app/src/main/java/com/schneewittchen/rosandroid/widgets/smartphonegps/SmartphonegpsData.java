@@ -13,8 +13,8 @@ import org.ros.node.topic.Publisher;
 import sensor_msgs.NavSatFix;
 
 /**
- * TODO: Description
  *
+ * verpackt GPS Koordinaten des SMartphones in ROS Message
  *
  */
 
@@ -29,7 +29,7 @@ public class SmartphonegpsData extends BaseData {
 
     }
 
-
+// GPS-Daten werden in ROS Message Typ NavSatFix verpackt
     @Override
     public Message toRosMessage(Publisher<Message> publisher, BaseEntity widget) {
         sensor_msgs.NavSatFix message = (NavSatFix) publisher.newMessage();
