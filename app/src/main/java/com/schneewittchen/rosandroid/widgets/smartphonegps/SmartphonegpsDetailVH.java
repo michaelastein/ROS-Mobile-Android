@@ -14,8 +14,11 @@ import java.util.List;
 
 import geometry_msgs.Twist;
 
-// Die Detail Viewholder-Klasse initialisiert die View und aktualisiert die Entity falls nötig.
+/**
+ * @author Michaela Stein
+ * Die Detail Viewholder-Klasse initialisiert die View und aktualisiert die Entity falls nötig.
 
+ */
 public class SmartphonegpsDetailVH extends PublisherWidgetViewHolder {
     private EditText textText;
 

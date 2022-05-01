@@ -21,7 +21,11 @@ import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 
-// In der View-Klasse werden die Darstellung und Interaktion des Widgets beschrieben
+/**
+ * @author Michaela Stein
+ * In der View-Klasse werden die Darstellung und Interaktion des Widgets beschrieben
+ * */
+
 public class SmartphonegpsView extends PublisherWidgetView {
     Paint buttonPaint;
     TextPaint textPaint;

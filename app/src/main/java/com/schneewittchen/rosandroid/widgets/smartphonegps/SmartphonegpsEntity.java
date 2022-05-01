@@ -5,8 +5,10 @@ import com.schneewittchen.rosandroid.model.repositories.rosRepo.message.Topic;
 
 import sensor_msgs.NavSatFix;
 
-// In der Entitätsklasse werden die Objekteigenschaften und Standardwerte definiert
-
+/**
+ * @author Michaela Stein
+  *In der Entitätsklasse werden die Objekteigenschaften und Standardwerte definiert
+*/
 public class SmartphonegpsEntity extends PublisherWidgetEntity {
     public String text;
 

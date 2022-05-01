@@ -13,6 +13,7 @@ import org.ros.node.topic.Publisher;
 import sensor_msgs.NavSatFix;
 
 /**
+ * @author Michaela Stein
  *
  * verpackt GPS Koordinaten des SMartphones in ROS Message
  *
